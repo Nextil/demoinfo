@@ -7,6 +7,8 @@ namespace EHVAG.DemoInfo.Edicts
     [ServerClass("CCSPlayer")]
     public class CSPlayer : BaseEntity
     {
+
+
         [NetworkedProperty("m_iTeamNum")]
         public NetworkedVar<int> TeamNum { get; private set; }
 

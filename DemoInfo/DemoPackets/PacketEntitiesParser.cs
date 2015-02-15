@@ -98,7 +98,7 @@ namespace EHVAG.DemoInfo.DemoPackets
             // Never used anywhere I guess. Every parser just skips this
 
             // Create the new entity
-            EntityInformation newEntity = new EntityInformation(id, serial, entityClass);
+            EntityInformation newEntity = new EntityInformation(id, serial, entityClass, Parser);
 
             //TODO: Instancebasline-parsing
 

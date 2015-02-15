@@ -16,6 +16,12 @@ namespace EHVAG.DemoInfo.Edicts
         public BaseEntity Instance { get; private set; }
 
         /// <summary>
+        /// Gets the current DemoParser
+        /// </summary>
+        /// <value>The instance.</value>
+        public DemoParser Parser { get; private set; }
+
+        /// <summary>
         /// Gets the serial of the entity
         /// </summary>
         /// <value>The serial.</value>
@@ -63,8 +69,9 @@ namespace EHVAG.DemoInfo.Edicts
         /// <value>The vectors.</value>
         internal NetworkedVar<Vector>[] Vectors { get; set; }
 
-        internal EntityInformation(int id, int serial, ServerClass serverClass)
+        internal EntityInformation(int id, int serial, ServerClass serverClass, DemoParser parser)
         {
+            Parser = parser;
             EntityID = id;
             Serial = serial;
             Class = serverClass;
@@ -91,6 +98,7 @@ namespace EHVAG.DemoInfo.Edicts
 
             Instance = (BaseEntity)Class.EntityType.GetConstructor(NOPARAMETERS).Invoke(NOPARAMETERSVALUES);
             Instance.EntityID = EntityID;
+            Instance.EntityInfo = this;
 
             int i = 0;
             foreach (var property in Class.FlattenedProps)
