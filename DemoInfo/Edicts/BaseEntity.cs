@@ -8,7 +8,7 @@ namespace EHVAG.DemoInfo.Edicts
 
         public EntityInformation EntityInfo { get; internal set; }
 
-        public BaseEntity()
+        protected BaseEntity()
         {
         }
     }
