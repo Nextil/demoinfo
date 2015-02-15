@@ -123,6 +123,9 @@ namespace EHVAG.DemoInfo.DataTables
                         break;
                 }
             }
+
+            for (int i = 0; i < flattenedProps.Count; i++)
+                flattenedProps[i].Index = i;
         }
 
         void GatherExcludesAndBaseclasses(SendTable sendTable, bool collectBaseClasses)

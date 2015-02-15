@@ -40,10 +40,11 @@ namespace EHVAG.DemoInfo.Edicts.Reflection
 
                     serverClass.EntityType = type;
 
-                    foreach (var property in type.GetProperties())
+                    foreach (var property in type.GetProperties(BindingFlags.Public|BindingFlags.NonPublic|BindingFlags.Instance))
                     {
                         var propAttributes = property.CustomAttributes.Where(a => a.AttributeType == typeof(NetworkedPropertyAttribute));
 
+                        FlattenedPropEntry firstProp = null;
                         foreach (var propAttribute in propAttributes)
                         {
                             string propName = (string)propAttribute.ConstructorArguments[0].Value;
@@ -83,7 +84,16 @@ namespace EHVAG.DemoInfo.Edicts.Reflection
                                     throw new NotImplementedException("This should never happen...");
                             }
 
-                            field.Setter = property.SetMethod;
+                            if (firstProp == null)
+                            {
+                                field.Setter = property.SetMethod;
+
+                                firstProp = field;
+                            }
+                            else
+                            {
+                                firstProp.References.Add(field);
+                            }
                         }
                     }
 

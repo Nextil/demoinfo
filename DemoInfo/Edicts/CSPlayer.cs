@@ -77,9 +77,11 @@ namespace EHVAG.DemoInfo.Edicts
         NetworkedVar<int> TeamNum { get; set; }
 
         [NetworkedProperty("cslocaldata.m_vecOrigin")]
+        [NetworkedProperty("csnonlocaldata.m_vecOrigin")]
         NetworkedVar<Vector> PositionXY { get; set; }
 
         [NetworkedProperty("cslocaldata.m_vecOrigin[2]")]
+        [NetworkedProperty("csnonlocaldata.m_vecOrigin[2]")]
         NetworkedVar<float> PositionZ { get; set; }
 
         /// <summary>
@@ -181,7 +183,7 @@ namespace EHVAG.DemoInfo.Edicts
             }
         }
 
-        private CSPlayer()
+        public CSPlayer()
         {
         }
     }

@@ -100,11 +100,9 @@ namespace EHVAG.DemoInfo.Edicts
             Instance.EntityID = EntityID;
             Instance.EntityInfo = this;
 
-            int i = 0;
-            foreach (var property in Class.FlattenedProps)
+            for(int i = 0; i < Class.FlattenedProps.Count; i++)
             {
-                i++;
-
+                var property = Class.FlattenedProps[i];
                 if (property.Setter != null)
                 {
                     switch ((SendPropertyType)property.Prop.Type)
@@ -117,27 +115,42 @@ namespace EHVAG.DemoInfo.Edicts
                             var networkedInt = new NetworkedVar<int>();
                             property.Setter.Invoke(Instance, new object[] { networkedInt });
                             Integers[i] = networkedInt;
+                            for (int j = 0; j < property.References.Count; j++)
+                                Integers[property.References[j].Index] = networkedInt;
+
                             break;
                         case SendPropertyType.Float: 
                             var networkedFloat = new NetworkedVar<float>();
                             property.Setter.Invoke(Instance, new object[] { networkedFloat });
                             Floats[i] = networkedFloat;
+
+                            for (int j = 0; j < property.References.Count; j++)
+                                Floats[property.References[j].Index] = networkedFloat;
                             break;
                         case SendPropertyType.Int64: 
                             var networkedLong = new NetworkedVar<long>();
                             property.Setter.Invoke(Instance, new object[] { networkedLong });
                             Longs[i] = networkedLong;
+
+                            for (int j = 0; j < property.References.Count; j++)
+                                Longs[property.References[j].Index] = networkedLong;
                             break;
                         case SendPropertyType.String: 
                             var networkedString = new NetworkedVar<string>();
                             property.Setter.Invoke(Instance, new object[] { networkedString });
                             Strings[i] = networkedString;
+
+                            for (int j = 0; j < property.References.Count; j++)
+                                Strings[property.References[j].Index] = networkedString;
                             break;
                         case SendPropertyType.Vector: 
                         case SendPropertyType.VectorXY: 
                             var networkedVector = new NetworkedVar<Vector>();
                             property.Setter.Invoke(Instance, new object[] { networkedVector });
                             Vectors[i] = networkedVector;
+
+                            for (int j = 0; j < property.References.Count; j++)
+                                Vectors[property.References[j].Index] = networkedVector;
                             break;
                         default:
                             throw new NotImplementedException(
