@@ -35,7 +35,8 @@ namespace EHVAG.DemoInfo.ProtobufMessages
                     parser.RawData.PacketParser.EntitiesParser.ParseEntitesMessage(this, bitstream);
 					bitstream.EndChunk();
 					if (!bitstream.ChunkFinished)
-						throw new NotImplementedException("PacketEntities packet had the wrong length");
+                        throw new NotImplementedException("PacketEntities packet was in an order we can't handle (although it's valid!)");
+
 					break;
 				}
 
