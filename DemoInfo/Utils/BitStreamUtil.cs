@@ -19,7 +19,9 @@ namespace EHVAG.DemoInfo.Utils
         /// </summary>
         public static IBitStream Create(Stream stream)
         {
-            return new UnsafeBitStream();
+            IBitStream bitstream =  new UnsafeBitStream();
+            bitstream.Initialize(stream);
+            return bitstream;
         }
 
         /// <summary>
