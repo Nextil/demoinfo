@@ -21,7 +21,7 @@ namespace EHVAG.DemoInfo.Edicts.Reflection
 
             foreach (var type in ass.GetTypes())
             {
-                var classAttribute = type.CustomAttributes.SingleOrDefault(a => a.AttributeType == typeof(ServerClassAttribute));
+                var classAttribute = type.GetCustomAttribute<ServerClassAttribute>();
 
                 //This is marked as server-class
                 if (classAttribute != null)
@@ -29,7 +29,7 @@ namespace EHVAG.DemoInfo.Edicts.Reflection
                     if (!typeof(BaseEntity).IsAssignableFrom(type))
                         throw new InvalidCastException(string.Format("The type {0} needs to derive from BaseEntity in order to be a ServerClass", type.Name));
 
-                    string serverClassName = (string)classAttribute.ConstructorArguments[0].Value;
+                    string serverClassName = classAttribute.ServerClass;
 
                     //First, check that it's a valid class. 
                     var serverClass = parser.RawData.ServerClasses.Single(a => a.Name == serverClassName);
@@ -41,12 +41,12 @@ namespace EHVAG.DemoInfo.Edicts.Reflection
 
                     foreach (var property in type.GetProperties(BindingFlags.Public|BindingFlags.NonPublic|BindingFlags.Instance))
                     {
-                        var propAttributes = property.CustomAttributes.Where(a => a.AttributeType == typeof(NetworkedPropertyAttribute));
+                        var propAttributes = property.GetCustomAttributes<NetworkedPropertyAttribute>();
 
                         FlattenedPropEntry firstProp = null;
                         foreach (var propAttribute in propAttributes)
                         {
-                            string propName = (string)propAttribute.ConstructorArguments[0].Value;
+                            string propName = propAttribute.PropertyName;
 
                             var field = serverClass.FlattenedProps.Single(a => a.PropertyName == propName);
 
@@ -58,24 +58,24 @@ namespace EHVAG.DemoInfo.Edicts.Reflection
                                 case SendPropertyType.Array: 
                                     throw new NotImplementedException();
                                     break;
-                                case SendPropertyType.Int: 
+                                case SendPropertyType.Int:
                                     if (property.PropertyType != typeof(NetworkedVar<int>))
                                         throw new InvalidOperationException("Bound to the wrong type!");
                                     break;
-                                case SendPropertyType.Float: 
+                                case SendPropertyType.Float:
                                     if (property.PropertyType != typeof(NetworkedVar<float>))
                                         throw new InvalidOperationException("Bound to the wrong type!");
                                     break;
-                                case SendPropertyType.Int64: 
+                                case SendPropertyType.Int64:
                                     if (property.PropertyType != typeof(NetworkedVar<long>))
                                         throw new InvalidOperationException("Bound to the wrong type!");
                                     break;
-                                case SendPropertyType.String: 
+                                case SendPropertyType.String:
                                     if (property.PropertyType != typeof(NetworkedVar<string>))
                                         throw new InvalidOperationException("Bound to the wrong type!");
                                     break;
-                                case SendPropertyType.Vector: 
-                                case SendPropertyType.VectorXY: 
+                                case SendPropertyType.Vector:
+                                case SendPropertyType.VectorXY:
                                     if (property.PropertyType != typeof(NetworkedVar<Vector>))
                                         throw new InvalidOperationException("Bound to the wrong type!");
                                     break;
