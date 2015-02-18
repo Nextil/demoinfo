@@ -43,7 +43,7 @@ namespace EHVAG.DemoInfo.ProtobufMessages
                         else if (fieldnum == 5)
                         {
                             DtName = bitstream.ReadProtobufString();
-                        } 
+                        }
                     }
                     else if (wireType == 0)
                     {
@@ -67,7 +67,7 @@ namespace EHVAG.DemoInfo.ProtobufMessages
                                 NumBits = val;
                                 break;
                             default:
-							// silently drop
+                                // silently drop
                                 break;
                         }
                     }
@@ -84,7 +84,7 @@ namespace EHVAG.DemoInfo.ProtobufMessages
                                 HighValue = val;
                                 break;
                             default:
-							// silently drop
+                                // silently drop
                                 break;
                         }
                     }
@@ -145,7 +145,7 @@ namespace EHVAG.DemoInfo.ProtobufMessages
                             _NeedsDecoder = val;
                             break;
                         default:
-						// silently drop
+                            // silently drop
                             break;
                     }
                 }
