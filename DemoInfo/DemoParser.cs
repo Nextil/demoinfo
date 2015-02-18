@@ -27,11 +27,8 @@ namespace EHVAG.DemoInfo
         /// <param name="demoStream">Demo file.</param>
         public DemoParser(Stream demoStream)
         {
-            DemoStream = new UnsafeBitStream();
-            DemoStream.Initialize(demoStream);
-
+            DemoStream = BitStreamUtil.Create(demoStream);
             RawData = new RawDataState(this);
-
 
             ParseHeader();
         }
