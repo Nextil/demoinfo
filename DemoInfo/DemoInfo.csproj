@@ -54,7 +54,6 @@
     <Compile Include="Utils\HexDumpUtil.cs" />
     <Compile Include="DataTables\DataTableParser.cs" />
     <Compile Include="DataTables\ServerClass.cs" />
-    <Compile Include="DataTables\DataTable.cs" />
     <Compile Include="DataTables\UnflattenedPropEntry.cs" />
     <Compile Include="ProtobufMessages\CreateStringTable.cs" />
     <Compile Include="ProtobufMessages\GameEvent.cs" />
