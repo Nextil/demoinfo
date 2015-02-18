@@ -79,6 +79,7 @@
     <Compile Include="Utils\PropDecoder.cs" />
     <Compile Include="Utils\FlagHelper.cs" />
     <Compile Include="Utils\FieldIndexStore.cs" />
+    <Compile Include="Edicts\CSTeam.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

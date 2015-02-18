@@ -70,7 +70,12 @@ namespace EHVAG.DemoInfo.DemoPackets
 
                     //parser.Entities[currentEntity] = null;
 
-                    //dunno, but you gotta read this. 
+                    // dunno, but you gotta read this. 
+                    // But officially this is the delete-flag, so I delete the entity
+                    // In the Valve-code it already gets deleted on the leave-flag
+                    // which would be above this if, and then there is no special
+                    // behaviour when the delete-flag comes. 
+                    // I'll just delete on the delete-flag however. 
                     if (reader.ReadBit())
                     {
                         Parser.RawData.Entities[currentEntity] = null;

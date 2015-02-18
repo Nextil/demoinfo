@@ -10,7 +10,6 @@ namespace EHVAG.DemoInfo.Edicts.Reflection
     {
         DemoParser parser;
 
-
         public ReflectionHelper(DemoParser parser)
         {
             this.parser = parser;
@@ -36,7 +35,7 @@ namespace EHVAG.DemoInfo.Edicts.Reflection
                     var serverClass = parser.RawData.ServerClasses.Single(a => a.Name == serverClassName);
 
                     if (serverClass.EntityType != null)
-                        throw new InvalidOperationException("Only one type is allowed!");
+                        throw new InvalidOperationException(string.Format("Only one class can be mapped to the class \"{0}\" - got at least two ({1} and {2})!", serverClassName, serverClass.EntityType.FullName, type.FullName));
 
                     serverClass.EntityType = type;
 
@@ -52,7 +51,7 @@ namespace EHVAG.DemoInfo.Edicts.Reflection
                             var field = serverClass.FlattenedProps.Single(a => a.PropertyName == propName);
 
                             if (field.Setter != null)
-                                throw new InvalidOperationException("Only one setter is allowed!");
+                                throw new InvalidOperationException("Only one field can be mapped to the property \"" + field.PropertyName + "\" of the class " + type.FullName);
 
                             switch ((SendPropertyType)field.Prop.Type)
                             {

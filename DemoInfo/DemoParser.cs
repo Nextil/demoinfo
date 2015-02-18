@@ -15,13 +15,6 @@ namespace EHVAG.DemoInfo
     public class DemoParser
     {
         /// <summary>
-        /// The demo-header of the file. 
-        /// </summary>
-        /// <value>The file header.</value>
-        public DemoHeader FileHeader { get; private set; }
-
-
-        /// <summary>
         /// The Demo-Stream, the main input-stream. 
         /// </summary>
         readonly IBitStream DemoStream;
@@ -110,12 +103,12 @@ namespace EHVAG.DemoInfo
         /// </summary>
         private void ParseHeader()
         {
-            FileHeader = DemoHeader.ParseFrom(DemoStream);
+            RawData.FileHeader = DemoHeader.ParseFrom(DemoStream);
 
-            if (FileHeader.Filestamp != DemoHeader.FILESTAMP)
+            if (RawData.FileHeader.Filestamp != DemoHeader.FILESTAMP)
                 throw new InvalidDataException("Invalid File-Type - expecting HL2DEMO");
 
-            if (FileHeader.Protocol != DemoHeader.DEMO_PROTOCOL)
+            if (RawData.FileHeader.Protocol != DemoHeader.DEMO_PROTOCOL)
                 throw new InvalidDataException("Invalid Demo-Protocol");
         }
 

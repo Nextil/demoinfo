@@ -1,9 +1,7 @@
-﻿using System;
-using EHVAG.DemoInfo.StringTables;
+﻿using EHVAG.DemoInfo.StringTables;
 using System.Collections.Generic;
 using EHVAG.DemoInfo.ValveStructs;
 using System.IO;
-using EHVAG.DemoInfo.Utils;
 using EHVAG.DemoInfo.DemoPackets;
 using EHVAG.DemoInfo.DataTables;
 using EHVAG.DemoInfo.Edicts;
@@ -15,7 +13,13 @@ namespace EHVAG.DemoInfo.States
         public const int MAX_PLAYERS = 64;
         public const int MAX_EDICTS = 4096;
 
-        private DemoParser Parser { get; set; }
+        DemoParser Parser { get; set; }
+
+        /// <summary>
+        /// The demo-header of the file. 
+        /// </summary>
+        /// <value>The file header.</value>
+        public DemoHeader FileHeader { get; internal set; }
 
         /// <summary>
         /// Gets the state of the stringtables at this point of the demofile.
