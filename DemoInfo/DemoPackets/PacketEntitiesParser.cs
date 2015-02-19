@@ -66,8 +66,6 @@ namespace EHVAG.DemoInfo.DemoPackets
                         // preserve / update
                         var e = Parser.RawData.Entities[currentEntity];
                         ApplyUpdate(e, reader);
-                        if (e.Instance != null)
-                            e.Instance.PropertiesUpdated();
                     }
                 }
                 else
