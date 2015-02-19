@@ -48,7 +48,15 @@ namespace EHVAG.DemoInfo.Edicts.Reflection
                         {
                             string propName = propAttribute.PropertyName;
 
-                            var field = serverClass.FlattenedProps.Single(a => a.PropertyName == propName);
+                            var field = serverClass.FlattenedProps.SingleOrDefault(a => a.PropertyName == propName);
+
+                            if (field == null)
+                            {
+                                if(!propAttribute.Optional)
+                                    throw new InvalidOperationException("Couldn't find property " + propAttribute.PropertyName + " of Server-Class " + serverClass.Name +". Consider setting it as optional.");
+
+                                continue;
+                            }
 
                             if (field.Setter != null)
                                 throw new InvalidOperationException("Only one field can be mapped to the property \"" + field.PropertyName + "\" of the class " + type.FullName);
