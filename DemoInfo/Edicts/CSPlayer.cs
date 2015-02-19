@@ -207,21 +207,9 @@ namespace EHVAG.DemoInfo.Edicts
         /// Gets the position.
         /// </summary>
         /// <value>The position.</value>
-        public Vector Position
-        {
-            get
-            {
-                return new Vector(PositionXY.Value.X, PositionXY.Value.Y, PositionZ.Value);
-            }
-        }
+        public Vector Position { get { return new Vector(PositionXY.Value.X, PositionXY.Value.Y, PositionZ.Value); }  }
 
-        public CSTeam Team 
-        {
-            get
-            {
-                return EntityInfo.Parser.GameState.Teams[TeamNum];
-            }
-        }
+        public CSTeam Team { get { return EntityInfo.Parser.GameState.Teams[TeamNum]; } }
 
         public CSPlayer()
         {
