@@ -22,14 +22,6 @@ namespace EHVAG.DemoInfo.Edicts
         internal virtual void FullyInitialized()
         {
         }
-
-        /// <summary>
-        /// This is called everytime this entity is updated
-        /// Except on the first update - then FullyInitialized is called. 
-        /// </summary>
-        internal virtual void PropertiesUpdated()
-        {
-        }
     }
 }
 

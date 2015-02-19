@@ -128,11 +128,6 @@ namespace EHVAG.DemoInfo.Edicts
             if (this.TeamName == "CT")
                 EntityInfo.Parser.GameState.Terrorists = this;
         }
-
-        internal override void PropertiesUpdated()
-        {
-            
-        }
     }
 }
 
