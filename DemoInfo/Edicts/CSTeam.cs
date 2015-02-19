@@ -98,7 +98,7 @@ namespace EHVAG.DemoInfo.Edicts
         /// create a pull-request.
         /// </summary>
         /// <value>The GG leader ent index C.</value>
-        [NetworkedProperty("m_nGGLeaderEntIndex_CT")]
+        [NetworkedProperty("m_nGGLeaderEntIndex_CT", true)]
         public NetworkedVar<int> GGLeaderEntIndex_CT { get; private set; }
 
 
@@ -110,7 +110,7 @@ namespace EHVAG.DemoInfo.Edicts
         /// create a pull-request.
         /// </summary>
         /// <value>The GG leader ent index C.</value>
-        [NetworkedProperty("m_nGGLeaderEntIndex_T")]
+        [NetworkedProperty("m_nGGLeaderEntIndex_T", true)]
         public NetworkedVar<int> GGLeaderEntIndex_T { get; private set; }
 
 
