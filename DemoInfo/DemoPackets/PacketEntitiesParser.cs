@@ -54,13 +54,20 @@ namespace EHVAG.DemoInfo.DemoPackets
 
                         Parser.RawData.Entities[currentEntity] = e;
 
+                        //Todo: Instance baselines
+
                         ApplyUpdate(e, reader);
+
+                        if (e.Instance != null)
+                            e.Instance.FullyInitialized();
                     }
                     else
                     {
                         // preserve / update
                         var e = Parser.RawData.Entities[currentEntity];
                         ApplyUpdate(e, reader);
+                        if (e.Instance != null)
+                            e.Instance.PropertiesUpdated();
                     }
                 }
                 else
@@ -179,13 +186,25 @@ namespace EHVAG.DemoInfo.DemoPackets
                     //I read the value here. That's it, the property is read. 
                     var intval = PropDecoder.DecodeInt(sendProp, reader);
 
-                    //Then I find out if there is a C#-Class that want's to have the value
-                    var intref = entity.Integers[index];
+                    //ints are special. Ints with only one bits are read as bool
+                    if (sendProp.NumBits != 1)
+                    {
+                        //Then I find out if there is a C#-Class that want's to have the value
+                        var intref = entity.Integers[index];
 
-                    //If yes, I set the value. 
-                    if (intref != null)
-                        intref.Value = intval;
+                        //If yes, I set the value. 
+                        if (intref != null)
+                            intref.Value = intval;
+                    }
+                    else
+                    {
+                        //Then I find out if there is a C#-Class that want's to have the value
+                        var boolref = entity.Bools[index];
 
+                        //If yes, I set the value. 
+                        if (boolref != null)
+                            boolref.Value = intval != 0;
+                    }
                     break;
                 case SendPropertyType.Float:
                     var floatval = PropDecoder.DecodeFloat(sendProp, reader);

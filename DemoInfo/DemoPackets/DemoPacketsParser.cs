@@ -31,11 +31,21 @@ namespace EHVAG.DemoInfo.DemoPackets
                 int length = reader.ReadProtobufVarInt(); // and how long is it?
                 reader.BeginChunk(length * 8); // read length bytes
 
-                if (cmd == (int)SVCMessages.PacketEntities)
-                { //Parse packet entities
-                    // The PacketEntities-Object calls EntitiesParser.ParseEntitiesMessage()
-                    // itself
-                    new PacketEntities().Parse(reader, Parser); 
+                switch((SVCMessages)cmd)
+                {
+                    
+                    case SVCMessages.PacketEntities:
+                        //Parse packet entities
+                        // The PacketEntities-Object calls EntitiesParser.ParseEntitiesMessage()
+                        // itself
+                        new PacketEntities().Parse(reader, Parser);
+                        break;
+                    case SVCMessages.CreateStringTable:
+                        new CreateStringTable().Parse(reader, Parser);
+                        break;
+                    case SVCMessages.UpdateStringTable:
+                        new UpdateStringTable().Parse(reader, Parser);
+                        break;
                 }
                 /* else if (cmd == (int)SVCMessages.GameEventList)
                 { //and all this other stuff

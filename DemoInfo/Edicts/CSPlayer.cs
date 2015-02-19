@@ -98,11 +98,56 @@ namespace EHVAG.DemoInfo.Edicts
         [NetworkedProperty("m_ArmorValue")]
         public NetworkedVar<int> Armor { get; private set; }
 
+        /// <summary>
+        /// Gets a value indicating whether this player has a defuser.
+        /// </summary>
+        /// <value><c>true</c> if this instance has defuser; otherwise, <c>false</c>.</value>
         [NetworkedProperty("m_bHasDefuser")]
-        NetworkedVar<int> _defuser { get; set; }
+        public NetworkedVar<bool> HasDefuser { get; private set; }
 
+        /// <summary>
+        /// Gets a value indicating whether this player has a helmet.
+        /// </summary>
+        /// <value><c>true</c> if this instance has helmet; otherwise, <c>false</c>.</value>
         [NetworkedProperty("m_bHasHelmet")]
-        NetworkedVar<int> _helmet { get; set; }
+        public NetworkedVar<bool> HasHelmet { get; private set; }
+
+        /// <summary>
+        /// Gets a bool indicating whether this player is defusing
+        /// </summary>
+        [NetworkedProperty("m_bIsDefusing")]
+        public NetworkedVar<bool> IsDefusing { get; private set; }
+
+        /// <summary>
+        /// Gets a bool indicating whether this player is scoped in.
+        /// </summary>
+        [NetworkedProperty("m_bIsScoped")]
+        public NetworkedVar<bool> IsScoped { get; private set; }
+
+        /// <summary>
+        /// Gets a bool indicating whether this player in a buyzone
+        /// </summary>
+        [NetworkedProperty("m_bInBuyZone")]
+        public NetworkedVar<bool> InBuyZone { get; private set; }
+
+        /// <summary>
+        /// Gets a bool indicating whether this player is in a bombsite
+        /// </summary>
+        [NetworkedProperty("m_bInBombZone")]
+        public NetworkedVar<bool> InBombZone { get; private set; }
+
+        /// <summary>
+        /// Gets a bool indicating whether this player is in a "no-defuse-area"
+        /// </summary>
+        [NetworkedProperty("m_bInNoDefuseArea")]
+        public NetworkedVar<bool> InNoDefuseArea { get; private set; }
+
+
+        /// <summary>
+        /// Gets a bool indicating whether this player is walking
+        /// </summary>
+        [NetworkedProperty("m_bIsWalking")]
+        public NetworkedVar<bool> IsWalking { get; private set; }
 
         /// <summary>
         /// Gets the money.
@@ -124,7 +169,6 @@ namespace EHVAG.DemoInfo.Edicts
         /// <value>The round start equipment value.</value>
         [NetworkedProperty("m_unRoundStartEquipmentValue")]
         public NetworkedVar<int> RoundStartEquipmentValue { get; private set; }
-
 
         /// <summary>
         /// Gets the freezetime end equipment value.
@@ -148,28 +192,16 @@ namespace EHVAG.DemoInfo.Edicts
         public NetworkedVar<float> EyeAngles0 { get; private set; }
 
         /// <summary>
-        /// Gets a value indicating whether this player has a defuser.
+        /// The flash-duration of the player 
         /// </summary>
-        /// <value><c>true</c> if this instance has defuser; otherwise, <c>false</c>.</value>
-        public bool HasDefuser
-        {
-            get
-            {
-                return _defuser != 0;
-            }
-        }
+        [NetworkedProperty("m_flFlashDuration")]
+        public NetworkedVar<float> FlashDuration { get; private set; }
 
         /// <summary>
-        /// Gets a value indicating whether this player has a helmet.
+        /// The maximum alpha of the last  flash
         /// </summary>
-        /// <value><c>true</c> if this instance has helmet; otherwise, <c>false</c>.</value>
-        public bool HasHelmet
-        {
-            get
-            {
-                return _helmet != 0;
-            }
-        }
+        [NetworkedProperty("m_flFlashMaxAlpha")]
+        public NetworkedVar<float> FlashMaxAlpha { get; private set; }
 
         /// <summary>
         /// Gets the position.
@@ -180,6 +212,14 @@ namespace EHVAG.DemoInfo.Edicts
             get
             {
                 return new Vector(PositionXY.Value.X, PositionXY.Value.Y, PositionZ.Value);
+            }
+        }
+
+        public CSTeam Team 
+        {
+            get
+            {
+                return EntityInfo.Parser.GameState.Teams[TeamNum];
             }
         }
 

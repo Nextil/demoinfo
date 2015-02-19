@@ -4,7 +4,7 @@ using EHVAG.DemoInfo.Utils;
 
 namespace EHVAG.DemoInfo.ProtobufMessages
 {
-    struct CreateStringTable
+    public struct CreateStringTable
     {
         public string Name;
         public Int32 MaxEntries;
@@ -15,7 +15,7 @@ namespace EHVAG.DemoInfo.ProtobufMessages
         public Int32 UserDataSizeBits;
         public Int32 Flags;
 
-        public void Parse(IBitStream bitstream, DemoParser parser)
+        internal void Parse(IBitStream bitstream, DemoParser parser)
         {
             while (!bitstream.ChunkFinished)
             {
@@ -37,7 +37,9 @@ namespace EHVAG.DemoInfo.ProtobufMessages
                         // string_data last, just like he should.
                         var len = bitstream.ReadProtobufVarInt();
                         bitstream.BeginChunk(len * 8);
-                        //DemoInfo.DP.Handler.CreateStringTableUserInfoHandler.Apply(this, bitstream, parser);
+
+                        StringTables.StringTable.ParseCreateStringTable(parser, bitstream, this);
+
                         bitstream.EndChunk();
                         if (!bitstream.ChunkFinished)
                             throw new NotImplementedException("PacketEntities packet was in an order we can't handle (although it's valid!). Please open an issue on GitHub");

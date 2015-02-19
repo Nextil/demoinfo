@@ -10,10 +10,8 @@ namespace EHVAG.DemoInfo.ProtobufMessages
         public Int32 TableId;
         public Int32 NumChangedEntries;
 
-        void Parse(IBitStream bitstream, DemoParser parser)
+        internal void Parse(IBitStream bitstream, DemoParser parser)
         {
-            throw new NotImplementedException();
-
             while (!bitstream.ChunkFinished)
             {
                 var desc = bitstream.ReadProtobufVarInt();
@@ -27,10 +25,13 @@ namespace EHVAG.DemoInfo.ProtobufMessages
                     // string_data last, just like he should.
                     var len = bitstream.ReadProtobufVarInt();
                     bitstream.BeginChunk(len * 8);
-                    //DemoInfo.DP.Handler.UpdateStringTableUserInfoHandler.Apply(this, bitstream, parser);
+
+                    StringTables.StringTable.ParseUpdateStringTable(parser, bitstream, this);
+
                     bitstream.EndChunk();
+
                     if (!bitstream.ChunkFinished)
-                        throw new NotImplementedException("Lord Gaben wasn't nice to us :/");
+                        throw new NotImplementedException("PacketEntities packet was in an order we can't handle (although it's valid!). Please open an issue on GitHub");
                     break;
                 }
 

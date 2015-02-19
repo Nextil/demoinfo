@@ -117,6 +117,22 @@ namespace EHVAG.DemoInfo.Edicts
         public CSTeam()
         {
         }
+
+        internal override void FullyInitialized()
+        {
+            EntityInfo.Parser.GameState.Teams[TeamID] = this;
+
+            if (this.TeamName == "TERRORIST")
+                EntityInfo.Parser.GameState.Terrorists = this;
+
+            if (this.TeamName == "CT")
+                EntityInfo.Parser.GameState.Terrorists = this;
+        }
+
+        internal override void PropertiesUpdated()
+        {
+            
+        }
     }
 }
 

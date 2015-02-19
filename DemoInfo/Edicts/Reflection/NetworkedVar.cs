@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace EHVAG.DemoInfo.Edicts.Reflection
 {
+    [DebuggerDisplay("{Value}")]
     public class NetworkedVar<T>
     {
         public EntityInformation entity;

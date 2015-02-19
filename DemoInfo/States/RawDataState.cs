@@ -5,6 +5,7 @@ using System.IO;
 using EHVAG.DemoInfo.DemoPackets;
 using EHVAG.DemoInfo.DataTables;
 using EHVAG.DemoInfo.Edicts;
+using EHVAG.DemoInfo.ProtobufMessages;
 
 namespace EHVAG.DemoInfo.States
 {
@@ -51,7 +52,16 @@ namespace EHVAG.DemoInfo.States
         /// <value>The packet parser.</value>
         public DemoPacketsParser PacketParser { get; private set; }
 
+        /// <summary>
+        /// Contains all Entities currently in use
+        /// </summary>
         public EntityInformation[] Entities { get; private set; }
+
+        /// <summary>
+        /// Contains the CreateStringTable-Messages. Used for decoding the UpdateStringTable
+        /// messages. 
+        /// </summary>
+        public List<CreateStringTable> CreateStringTableMessages = new List<CreateStringTable>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EHVAG.DemoInfo.States.RawDataState"/> class.
@@ -78,7 +88,7 @@ namespace EHVAG.DemoInfo.States
 
             foreach (var PlayerEntry in StringTables["userinfo"].Entries)
             {
-                if (PlayerEntry.UserData != null)
+                if (PlayerEntry != null && PlayerEntry.UserData != null)
                 {
                     //Yes, this is the right way
                     int playerid = int.Parse(PlayerEntry.Name);

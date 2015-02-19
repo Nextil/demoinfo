@@ -22,6 +22,12 @@ namespace EHVAG.DemoInfo
         public RawDataState RawData { get; private set; }
 
         /// <summary>
+        /// Gets most informations about the current state of the Game
+        /// </summary>
+        public DemoState GameState { get; private set; }
+
+
+        /// <summary>
         /// Initializes the DemoParser and reads the DemoHeader.
         /// </summary>
         /// <param name="demoStream">Demo file.</param>
@@ -29,6 +35,7 @@ namespace EHVAG.DemoInfo
         {
             DemoStream = BitStreamUtil.Create(demoStream);
             RawData = new RawDataState(this);
+            GameState = new DemoState(this);
 
             ParseHeader();
         }

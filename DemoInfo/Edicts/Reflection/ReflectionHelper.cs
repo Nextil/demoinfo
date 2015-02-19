@@ -59,8 +59,17 @@ namespace EHVAG.DemoInfo.Edicts.Reflection
                                     throw new NotImplementedException();
                                     break;
                                 case SendPropertyType.Int:
-                                    if (property.PropertyType != typeof(NetworkedVar<int>))
-                                        throw new InvalidOperationException("Bound to the wrong type!");
+                                    if (field.Prop.NumBits != 1)
+                                    {
+                                        if (property.PropertyType != typeof(NetworkedVar<int>))
+                                            throw new InvalidOperationException("Bound to the wrong type - you need to bind to ints for this!");
+                                    }
+                                    else
+                                    {
+                                        if (property.PropertyType != typeof(NetworkedVar<bool>))
+                                            throw new InvalidOperationException("Bound to the wrong type - you need to bind to bools for this!");
+                                    }
+
                                     break;
                                 case SendPropertyType.Float:
                                     if (property.PropertyType != typeof(NetworkedVar<float>))

@@ -43,31 +43,38 @@ namespace EHVAG.DemoInfo.Edicts
         /// Gets or sets the integers.
         /// </summary>
         /// <value>The integers.</value>
-        internal NetworkedVar<int>[] Integers { get; set; }
+        internal NetworkedVar<int>[] Integers { get; private set; }
 
         /// <summary>
         /// Gets or sets the longs.
         /// </summary>
         /// <value>The longs.</value>
-        internal NetworkedVar<long>[] Longs { get; set; }
+        internal NetworkedVar<long>[] Longs { get; private set; }
 
         /// <summary>
         /// Gets or sets the floats.
         /// </summary>
         /// <value>The floats.</value>
-        internal NetworkedVar<float>[] Floats { get; set; }
+        internal NetworkedVar<float>[] Floats { get; private set; }
 
         /// <summary>
         /// Gets or sets the strings.
         /// </summary>
         /// <value>The strings.</value>
-        internal NetworkedVar<string>[] Strings { get; set; }
+        internal NetworkedVar<string>[] Strings { get; private set; }
 
         /// <summary>
         /// Gets or sets the vectors.
         /// </summary>
         /// <value>The vectors.</value>
-        internal NetworkedVar<Vector>[] Vectors { get; set; }
+        internal NetworkedVar<Vector>[] Vectors { get; private set; }
+
+        /// <summary>
+        /// Gets or sets the bools.
+        /// </summary>
+        /// <value>The vectors.</value>
+        internal NetworkedVar<bool>[] Bools { get; private set; }
+
 
         internal EntityInformation(int id, int serial, ServerClass serverClass, DemoParser parser)
         {
@@ -80,6 +87,7 @@ namespace EHVAG.DemoInfo.Edicts
             Floats = new NetworkedVar<float>[serverClass.FlattenedProps.Count];
             Strings = new NetworkedVar<string>[serverClass.FlattenedProps.Count];
             Vectors = new NetworkedVar<Vector>[serverClass.FlattenedProps.Count];
+            Bools = new NetworkedVar<bool>[serverClass.FlattenedProps.Count];
 
             CreateInstance();
         }
@@ -111,13 +119,23 @@ namespace EHVAG.DemoInfo.Edicts
 
                         case SendPropertyType.Array: 
                             throw new NotImplementedException();
-                        case SendPropertyType.Int: 
-                            var networkedInt = new NetworkedVar<int>();
-                            property.Setter.Invoke(Instance, new object[] { networkedInt });
-                            Integers[i] = networkedInt;
-                            for (int j = 0; j < property.References.Count; j++)
-                                Integers[property.References[j].Index] = networkedInt;
-
+                        case SendPropertyType.Int:
+                            if (property.Prop.NumBits == 1)
+                            {
+                                var networkedBool = new NetworkedVar<bool>();
+                                property.Setter.Invoke(Instance, new object[] { networkedBool });
+                                Bools[i] = networkedBool;
+                                for (int j = 0; j < property.References.Count; j++)
+                                    Bools[property.References[j].Index] = networkedBool;
+                            }
+                            else
+                            {
+                                var networkedInt = new NetworkedVar<int>();
+                                property.Setter.Invoke(Instance, new object[] { networkedInt });
+                                Integers[i] = networkedInt;
+                                for (int j = 0; j < property.References.Count; j++)
+                                    Integers[property.References[j].Index] = networkedInt;
+                            }
                             break;
                         case SendPropertyType.Float: 
                             var networkedFloat = new NetworkedVar<float>();

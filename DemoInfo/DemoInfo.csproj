@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -37,6 +37,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DemoParser.cs" />
+    <Compile Include="States\DemoState.cs" />
     <Compile Include="Utils\UnsafeBitStream.cs" />
     <Compile Include="Utils\IBitStream.cs" />
     <Compile Include="ValveStructs\DemoHeader.cs" />
@@ -71,7 +72,6 @@
     <Compile Include="Edicts\Reflection\NetworkedVar.cs" />
     <Compile Include="Edicts\BaseEntity.cs" />
     <Compile Include="Edicts\Reflection\ReflectionHelper.cs" />
-    <Compile Include="ProtobufMessages\ProtobufMessageParser.cs" />
     <Compile Include="Edicts\EntityInformation.cs" />
     <Compile Include="DemoPackets\PacketEntitiesParser.cs" />
     <Compile Include="DemoPackets\DemoPacketsParser.cs" />
@@ -81,17 +81,7 @@
     <Compile Include="Edicts\CSTeam.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <Folder Include="Utils\" />
-    <Folder Include="ValveStructs\" />
-    <Folder Include="StringTables\" />
-    <Folder Include="States\" />
-    <Folder Include="DataTables\" />
-    <Folder Include="ProtobufMessages\" />
-    <Folder Include="Edicts\" />
-    <Folder Include="Edicts\Reflection\" />
-    <Folder Include="DemoPackets\" />
-  </ItemGroup>
+  <ItemGroup />
   <ProjectExtensions>
     <MonoDevelop>
       <Properties>
