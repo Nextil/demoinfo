@@ -4,7 +4,7 @@ using System.Linq;
 using EHVAG.DemoInfo.DataTables;
 using EHVAG.DemoInfo.ValveStructs;
 
-namespace EHVAG.DemoInfo.Edicts.Reflection
+namespace EHVAG.DemoInfo.Utils.Reflection
 {
     public class ReflectionHelper
     {

@@ -67,11 +67,7 @@
     <Compile Include="DataTables\FlattenedPropEntry.cs" />
     <Compile Include="DataTables\SendTablePropertyEnums.cs" />
     <Compile Include="Edicts\CSPlayer.cs" />
-    <Compile Include="Edicts\Reflection\ServerClassAttribute.cs" />
-    <Compile Include="Edicts\Reflection\NetworkedPropertyAttribute.cs" />
-    <Compile Include="Edicts\Reflection\NetworkedVar.cs" />
     <Compile Include="Edicts\BaseEntity.cs" />
-    <Compile Include="Edicts\Reflection\ReflectionHelper.cs" />
     <Compile Include="Edicts\EntityInformation.cs" />
     <Compile Include="DemoPackets\PacketEntitiesParser.cs" />
     <Compile Include="DemoPackets\DemoPacketsParser.cs" />
@@ -79,6 +75,10 @@
     <Compile Include="Utils\FlagHelper.cs" />
     <Compile Include="Utils\FieldIndexStore.cs" />
     <Compile Include="Edicts\CSTeam.cs" />
+    <Compile Include="Utils\Reflection\NetworkedPropertyAttribute.cs" />
+    <Compile Include="Utils\Reflection\NetworkedVar.cs" />
+    <Compile Include="Utils\Reflection\ReflectionHelper.cs" />
+    <Compile Include="Utils\Reflection\ServerClassAttribute.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />
