@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EHVAG.DemoInfo.Edicts.Reflection
+namespace EHVAG.DemoInfo.Utils.Reflection
 {
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
     public class NetworkedPropertyAttribute : Attribute

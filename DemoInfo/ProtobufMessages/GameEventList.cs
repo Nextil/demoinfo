@@ -2,19 +2,21 @@
 using System.IO;
 using System.Collections.Generic;
 using EHVAG.DemoInfo.Utils;
+using EHVAG.DemoInfo.Utils.Reflection;
+using System.Reflection;
 
 namespace EHVAG.DemoInfo.ProtobufMessages
 {
-    struct GameEventList
+    public class GameEventList
     {
-        public struct Key
+        public class Key
         {
             public Int32 Type;
             public String Name;
+            public MethodInfo Setter;
 
-            public void Parse(IBitStream bitstream)
+            internal void Parse(IBitStream bitstream)
             {
-                throw new NotImplementedException();
                 while (!bitstream.ChunkFinished)
                 {
                     var desc = bitstream.ReadProtobufVarInt();
@@ -34,11 +36,14 @@ namespace EHVAG.DemoInfo.ProtobufMessages
             }
         }
 
-        struct Descriptor
+        public class Descriptor
         {
             public Int32 EventId;
             public String Name;
             public Key[] Keys;
+
+            public Type EventType;
+
 
             internal void Parse(IBitStream bitstream)
             {
@@ -72,10 +77,14 @@ namespace EHVAG.DemoInfo.ProtobufMessages
             }
         }
 
-        public void Parse(IBitStream bitstream, DemoParser parser)
+        internal void Parse(IBitStream bitstream, DemoParser parser)
         {
-            throw new NotImplementedException();
-            //GameEventHandler.HandleGameEventList(ReadDescriptors(bitstream), parser);
+            foreach (var descriptor in ReadDescriptors(bitstream))
+                parser.RawData.GameEventDescriptors[descriptor.EventId] = descriptor;
+
+            var h = new ReflectionHelper(parser);
+            h.DoGameEventReflection();
+            parser.RawData.GameEventParser.Initialize();
         }
 
         private IEnumerable<Descriptor> ReadDescriptors(IBitStream bitstream)

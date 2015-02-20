@@ -1,5 +1,5 @@
 ﻿using System;
-using EHVAG.DemoInfo.Edicts.Reflection;
+using EHVAG.DemoInfo.Utils.Reflection;
 using EHVAG.DemoInfo.ValveStructs;
 
 namespace EHVAG.DemoInfo.Edicts
@@ -213,6 +213,11 @@ namespace EHVAG.DemoInfo.Edicts
 
         public CSPlayer()
         {
+        }
+
+        internal override void FullyInitialized()
+        {
+            EntityInfo.Parser.GameState.Players.Add(this);
         }
     }
 }

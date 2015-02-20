@@ -1,5 +1,5 @@
 ﻿using System;
-using EHVAG.DemoInfo.Edicts.Reflection;
+using EHVAG.DemoInfo.Utils.Reflection;
 
 namespace EHVAG.DemoInfo.Edicts
 {

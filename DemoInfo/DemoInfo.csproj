@@ -79,6 +79,11 @@
     <Compile Include="Utils\Reflection\NetworkedVar.cs" />
     <Compile Include="Utils\Reflection\ReflectionHelper.cs" />
     <Compile Include="Utils\Reflection\ServerClassAttribute.cs" />
+    <Compile Include="Utils\Reflection\ValveEventAttribute.cs" />
+    <Compile Include="DemoPackets\GameEvents\BaseEvent.cs" />
+    <Compile Include="DemoPackets\GameEvents\GameEventParser.cs" />
+    <Compile Include="DemoPackets\GameEvents\EventInformation.cs" />
+    <Compile Include="DemoPackets\GameEvents\PlayerFootstep.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />
@@ -93,4 +98,7 @@
       </Properties>
     </MonoDevelop>
   </ProjectExtensions>
+  <ItemGroup>
+    <Folder Include="DemoPackets\GameEvents\" />
+  </ItemGroup>
 </Project>

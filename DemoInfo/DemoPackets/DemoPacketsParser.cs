@@ -33,7 +33,6 @@ namespace EHVAG.DemoInfo.DemoPackets
 
                 switch((SVCMessages)cmd)
                 {
-                    
                     case SVCMessages.PacketEntities:
                         //Parse packet entities
                         // The PacketEntities-Object calls EntitiesParser.ParseEntitiesMessage()
@@ -45,6 +44,12 @@ namespace EHVAG.DemoInfo.DemoPackets
                         break;
                     case SVCMessages.UpdateStringTable:
                         new UpdateStringTable().Parse(reader, Parser);
+                        break;
+                    case SVCMessages.GameEventList:
+                        new GameEventList().Parse(reader, Parser);
+                        break;
+                    case SVCMessages.GameEvent:
+                        Parser.RawData.GameEventParser.Parse(new GameEvent().Parse(reader, Parser));
                         break;
                 }
                 /* else if (cmd == (int)SVCMessages.GameEventList)

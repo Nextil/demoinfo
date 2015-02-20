@@ -19,11 +19,18 @@ namespace EHVAG.DemoInfo.States
 
         public CSTeam[] Teams { get; private set; }
 
+        public List<CSPlayer> Players { get; set; }
+
         public DemoState(DemoParser parser)
         {
             this.Parser = parser;
-
             Teams = new CSTeam[MAXTEAMS];
+            Players = new List<CSPlayer>();
+        }
+
+        internal CSPlayer GetPlayerByUserID(int id)
+        {
+            return Players.SingleOrDefault(a => a.UserID == id);
         }
 
     }

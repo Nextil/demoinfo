@@ -6,6 +6,7 @@ using EHVAG.DemoInfo.DemoPackets;
 using EHVAG.DemoInfo.DataTables;
 using EHVAG.DemoInfo.Edicts;
 using EHVAG.DemoInfo.ProtobufMessages;
+using EHVAG.DemoInfo.DemoPackets.GameEvents;
 
 namespace EHVAG.DemoInfo.States
 {
@@ -61,7 +62,11 @@ namespace EHVAG.DemoInfo.States
         /// Contains the CreateStringTable-Messages. Used for decoding the UpdateStringTable
         /// messages. 
         /// </summary>
-        public List<CreateStringTable> CreateStringTableMessages = new List<CreateStringTable>();
+        public List<CreateStringTable> CreateStringTableMessages { get; private set; }
+
+        public Dictionary<int, GameEventList.Descriptor> GameEventDescriptors { get; private set; }
+
+        public GameEventParser GameEventParser { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EHVAG.DemoInfo.States.RawDataState"/> class.
@@ -74,6 +79,9 @@ namespace EHVAG.DemoInfo.States
             PlayerInfos = new PlayerInfo[MAX_PLAYERS];
             Entities = new EntityInformation[MAX_EDICTS];
             PacketParser = new DemoPacketsParser(Parser);
+            GameEventDescriptors = new Dictionary<int, GameEventList.Descriptor>();
+            CreateStringTableMessages = new List<CreateStringTable>();
+            GameEventParser = new GameEventParser(Parser);
         }
 
         /// <summary>

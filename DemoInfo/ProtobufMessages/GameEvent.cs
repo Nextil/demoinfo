@@ -24,7 +24,7 @@ namespace EHVAG.DemoInfo.ProtobufMessages
         public Int32 EventId;
         public IList<QuickAndDirtyKey> Keys;
 
-        internal void Parse(IBitStream bitstream, DemoParser parser)
+        internal GameEvent Parse(IBitStream bitstream, DemoParser parser)
         {
             Keys = new List<QuickAndDirtyKey>();
             while (!bitstream.ChunkFinished)
@@ -100,6 +100,8 @@ namespace EHVAG.DemoInfo.ProtobufMessages
                 else
                     throw new InvalidDataException();
             }
+
+            return this;
         }
     }
 }

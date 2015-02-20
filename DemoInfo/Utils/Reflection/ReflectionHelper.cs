@@ -3,19 +3,22 @@ using System.Reflection;
 using System.Linq;
 using EHVAG.DemoInfo.DataTables;
 using EHVAG.DemoInfo.ValveStructs;
+using EHVAG.DemoInfo.DemoPackets.GameEvents;
+using System.IO;
+using EHVAG.DemoInfo.Edicts;
 
 namespace EHVAG.DemoInfo.Utils.Reflection
 {
     public class ReflectionHelper
     {
-        DemoParser parser;
+        readonly DemoParser parser;
 
         public ReflectionHelper(DemoParser parser)
         {
             this.parser = parser;
         }
 
-        public void DoReflection()
+        public void DoServerClassesReflection()
         {
             var ass = Assembly.GetExecutingAssembly();
 
@@ -110,6 +113,99 @@ namespace EHVAG.DemoInfo.Utils.Reflection
                             {
                                 firstProp.References.Add(field);
                             }
+                        }
+                    }
+
+                }
+            }
+        }
+
+        public void DoGameEventReflection()
+        {
+            var ass = Assembly.GetExecutingAssembly();
+
+            foreach (var type in ass.GetTypes())
+            {
+                var classAttribute = type.GetCustomAttribute<ValveEventAttribute>();
+
+                //This is marked as server-class
+                if (classAttribute != null)
+                {
+                    if (!typeof(BaseEvent).IsAssignableFrom(type))
+                        throw new InvalidCastException(string.Format("The type {0} needs to derive from BaseEvent in order to be a GameEvent", type.Name));
+
+                    string eventName = classAttribute.ValveEvent;
+
+                    //First, check that it's a valid class. 
+                    var gameEvent = parser.RawData.GameEventDescriptors.Values.Single(a => a.Name == eventName);
+
+                    if (gameEvent.EventType != null)
+                        throw new InvalidOperationException(string.Format("Only one class can be mapped to the event \"{0}\" - got at least two ({1} and {2})!", eventName, gameEvent.EventType.FullName, type.FullName));
+
+                    gameEvent.EventType = type;
+
+                    foreach (var property in type.GetProperties(BindingFlags.Public|BindingFlags.NonPublic|BindingFlags.Instance))
+                    {
+                        var propAttributes = property.GetCustomAttributes<NetworkedPropertyAttribute>();
+
+                        bool firstProp = true;
+                        foreach (var propAttribute in propAttributes)
+                        {
+                            string propName = propAttribute.PropertyName;
+
+                            var key = gameEvent.Keys.SingleOrDefault(a => a.Name == propName);
+
+                            if (key == null)
+                            {
+                                if(!propAttribute.Optional)
+                                    throw new InvalidOperationException("Couldn't find event-key " + propAttribute.PropertyName + " of Game-Event " + gameEvent.Name +". Consider setting it as optional.");
+
+                                continue;
+                            }
+
+                            if (key.Setter != null)
+                                throw new InvalidOperationException("Only one field can be mapped to the property \"" + key.Name + "\" of the class " + type.FullName);
+
+                            switch (key.Type)
+                            {
+                                case 1: // string
+                                    if (property.PropertyType != typeof(NetworkedVar<string>))
+                                        throw new InvalidOperationException(
+                                            string.Format("Type of {0}.{1} must be NetworkedVar<string>, got {2}", type.Name, property.Name, property.PropertyType.Name)
+                                        );
+                                    break;
+                                case 2: // float
+                                    if (property.PropertyType != typeof(NetworkedVar<float>))
+                                        throw new InvalidOperationException(
+                                            string.Format("Type of {0}.{1} must be NetworkedVar<float>, got {2}", type.Name, property.Name, property.PropertyType.Name)
+                                        );
+                                    break;
+                                case 3: // long
+                                case 4: // short
+                                case 5: // byte
+                                    if (property.PropertyType != typeof(NetworkedVar<int>))
+                                        throw new InvalidOperationException(
+                                            string.Format("Type of {0}.{1} must be NetworkedVar<int>, got {2}", type.Name, property.Name, property.PropertyType.Name)
+                                        );
+                                    break;
+                                case 6: // bool
+                                    if (property.PropertyType != typeof(NetworkedVar<bool>))
+                                        throw new InvalidOperationException(
+                                            string.Format("Type of {0}.{1} must be NetworkedVar<bool>, got {2}", type.Name, property.Name, property.PropertyType.Name)
+                                        );
+                                    break;
+                                default:
+                                    throw new InvalidDataException("Looks like Valve introduced a new GameEvent-Key-Type. Please open an issue at GitHub. ");
+                            }
+
+
+                            key.Setter = property.SetMethod;
+
+                            if (!firstProp)
+                            {
+                                throw new Exception("Game-Events can only bind one key to a variable.");
+                            }
+                            firstProp = false;
                         }
                     }
 

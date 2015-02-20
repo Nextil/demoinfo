@@ -1,9 +1,7 @@
 ﻿using System;
-using EHVAG.DemoInfo.Edicts.Reflection;
 using EHVAG.DemoInfo.DataTables;
 using EHVAG.DemoInfo.ValveStructs;
-using EHVAG.DemoInfo.Utils;
-using System.Collections.Generic;
+using EHVAG.DemoInfo.Utils.Reflection;
 
 namespace EHVAG.DemoInfo.Edicts
 {
