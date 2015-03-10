@@ -2,6 +2,7 @@
 
 namespace EHVAG.DemoInfo.Utils.Reflection
 {
+    [AttributeUsage(AttributeTargets.Class)]
     public class ValveEventAttribute : Attribute
     {
         public string ValveEvent { get; private set; }

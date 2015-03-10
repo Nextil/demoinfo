@@ -144,16 +144,21 @@ namespace EHVAG.DemoInfo.Utils.Reflection
 
                     gameEvent.EventType = type;
 
+                    int foundProps = 0;
+
                     foreach (var property in type.GetProperties(BindingFlags.Public|BindingFlags.NonPublic|BindingFlags.Instance))
                     {
                         var propAttributes = property.GetCustomAttributes<NetworkedPropertyAttribute>();
 
+
                         bool firstProp = true;
+
                         foreach (var propAttribute in propAttributes)
                         {
                             string propName = propAttribute.PropertyName;
 
-                            var key = gameEvent.Keys.SingleOrDefault(a => a.Name == propName);
+                            var key = gameEvent.Keys.First(a => a.Name == propName);
+
 
                             if (key == null)
                             {
@@ -203,12 +208,26 @@ namespace EHVAG.DemoInfo.Utils.Reflection
 
                             if (!firstProp)
                             {
-                                throw new Exception("Game-Events can only bind one key to a variable.");
+                                throw new Exception("Game-Events can only bind one key to one variable.");
                             }
                             firstProp = false;
+                            foundProps++;
                         }
                     }
 
+                    #if DEBUG_SLOW_MONO
+                    if (foundProps < gameEvent.Keys.Length)
+                    {
+                        string missingProperties = string.Join(", ", gameEvent.Keys.Where(a => a.Setter == null).Select(a => a.Name));
+
+                        throw new InvalidProgramException(
+                            string.Format(
+                                "GameEvent {0} is missing variables for the propert{2} {1}", 
+                                gameEvent.Name,
+                                missingProperties, 
+                                (gameEvent.Keys.Length - foundProps == 1) ? "y" : "ies"  ));
+                    }
+                    #endif
                 }
             }
         }

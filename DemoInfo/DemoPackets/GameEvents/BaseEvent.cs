@@ -7,7 +7,7 @@ namespace EHVAG.DemoInfo.DemoPackets.GameEvents
         /// <summary>
         /// Tells and GameEvent to Handle itself. Rough times. 
         /// </summary>
-        public abstract void HandleYourself();
+        internal abstract void HandleYourself();
 
         public EventInformation EventInfo { get; internal set; }
     }
