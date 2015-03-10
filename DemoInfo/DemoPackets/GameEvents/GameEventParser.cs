@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using EHVAG.DemoInfo.ProtobufMessages;
+using System.Diagnostics;
 
 namespace EHVAG.DemoInfo.DemoPackets.GameEvents
 {
@@ -38,7 +39,7 @@ namespace EHVAG.DemoInfo.DemoPackets.GameEvents
             if (info.Instance == null)
             {
                 #if DEBUG_SLOW_MONO
-                //Console.WriteLine("Warning: Event " + Parser.RawData.GameEventDescriptors[gameEvent.EventId].Name + " is unused!");
+                Console.WriteLine ("Warning: Event " + Parser.RawData.GameEventDescriptors[gameEvent.EventId].Name + " is unused!");
                 #endif
                 return;
             }

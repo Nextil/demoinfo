@@ -19,7 +19,17 @@ namespace EHVAG.DemoInfo
         /// </summary>
         readonly IBitStream DemoStream;
 
+        /// <summary>
+        /// Gets the raw data of the parser. This shouldn't be used in most cases. 
+        /// </summary>
+        /// <value>The raw data.</value>
         public RawDataState RawData { get; private set; }
+
+        /// <summary>
+        /// Gets access to the Events of the parser. 
+        /// </summary>
+        /// <value>The raw data.</value>
+        public EventState Events { get; private set; }
 
         /// <summary>
         /// Gets most informations about the current state of the Game
@@ -36,6 +46,7 @@ namespace EHVAG.DemoInfo
             DemoStream = BitStreamUtil.Create(demoStream);
             RawData = new RawDataState(this);
             GameState = new DemoState(this);
+            Events = new EventState(this);
 
             ParseHeader();
         }

@@ -22,7 +22,6 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <DebugType>full</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
@@ -83,7 +82,10 @@
     <Compile Include="DemoPackets\GameEvents\BaseEvent.cs" />
     <Compile Include="DemoPackets\GameEvents\GameEventParser.cs" />
     <Compile Include="DemoPackets\GameEvents\EventInformation.cs" />
-    <Compile Include="DemoPackets\GameEvents\PlayerFootstep.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\PlayerFootstep.cs" />
+    <Compile Include="States\EventState.cs" />
+    <Compile Include="DemoPackets\GameEvents\GameEventEventArgs.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\WeaponFire.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />
@@ -100,5 +102,6 @@
   </ProjectExtensions>
   <ItemGroup>
     <Folder Include="DemoPackets\GameEvents\" />
+    <Folder Include="DemoPackets\GameEvents\Events\" />
   </ItemGroup>
 </Project>
