@@ -140,7 +140,14 @@ namespace EHVAG.DemoInfo.Utils.Reflection
                     var gameEvent = parser.RawData.GameEventDescriptors.Values.Single(a => a.Name == eventName);
 
                     if (gameEvent.EventType != null)
-                        throw new InvalidOperationException(string.Format("Only one class can be mapped to the event \"{0}\" - got at least two ({1} and {2})!", eventName, gameEvent.EventType.FullName, type.FullName));
+                        throw new InvalidOperationException(
+                            string.Format(
+                                "Only one class can be mapped to the event \"{0}\" - got at least two ({1} and {2})!", 
+                                eventName, 
+                                gameEvent.EventType.FullName, 
+                                type.FullName
+                            )
+                        );
 
                     gameEvent.EventType = type;
 
