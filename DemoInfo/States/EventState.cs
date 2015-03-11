@@ -9,21 +9,13 @@ namespace EHVAG.DemoInfo.States
         readonly DemoParser Parser;
 
         public event EventHandler<GameEventEventArgs<PlayerFootstep>> PlayerFootstep;
-
         public event EventHandler<GameEventEventArgs<WeaponFire>> WeaponFire;
-
         public event EventHandler<GameEventEventArgs<PlayerBlind>> PlayerBlind;
-
         public event EventHandler<GameEventEventArgs<PlayerJump>> PlayerJump;
-
         public event EventHandler<GameEventEventArgs<WeaponReload>> WeaponReload;
-
         public event EventHandler<GameEventEventArgs<TournamentReward>> TournamentReward;
-
         public event EventHandler<GameEventEventArgs<BombBeep>> BombBeep;
-
         public event EventHandler<GameEventEventArgs<WeaponZoom>> WeaponZoom;
-
         public event EventHandler<GameEventEventArgs<PlayerSpwan>> PlayerSpwan;
 
         public EventState(DemoParser parser)

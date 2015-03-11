@@ -20,7 +20,7 @@ namespace EHVAG.DemoInfo.DemoPackets.GameEvents.Events
         {
             Player = EventInfo.Parser.GameState.GetPlayerByUserID(UserID);
 
-            //EventInfo.Parser.Events.RaisePlayerFootstep(this);
+            EventInfo.Parser.Events.RaisePlayerJump(this);
         }
     }
 }
