@@ -82,10 +82,19 @@
     <Compile Include="DemoPackets\GameEvents\BaseEvent.cs" />
     <Compile Include="DemoPackets\GameEvents\GameEventParser.cs" />
     <Compile Include="DemoPackets\GameEvents\EventInformation.cs" />
-    <Compile Include="DemoPackets\GameEvents\Events\PlayerFootstep.cs" />
     <Compile Include="States\EventState.cs" />
     <Compile Include="DemoPackets\GameEvents\GameEventEventArgs.cs" />
     <Compile Include="DemoPackets\GameEvents\Events\WeaponFire.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\PlayerFootstep.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\PlayerBlind.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\PlayerJump.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\WeaponReload.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\TournamentReward.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\BombBeep.cs" />
+    <Compile Include="Edicts\CC4.cs" />
+    <Compile Include="Edicts\CPlantedC4.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\WeaponZoom.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\PlayerSpwan.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />
