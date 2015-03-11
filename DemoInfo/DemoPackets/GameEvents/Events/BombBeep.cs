@@ -25,6 +25,7 @@ namespace EHVAG.DemoInfo.DemoPackets.GameEvents.Events
             {
                 if(EventInfo.Parser.RawData.Entities[BombEntityIndex].Class.Name == "CC4")
                     return (CC4)EventInfo.Parser.RawData.Entities[BombEntityIndex].Instance;
+                return null;
             }
         }
 
@@ -39,6 +40,7 @@ namespace EHVAG.DemoInfo.DemoPackets.GameEvents.Events
             {
                 if(EventInfo.Parser.RawData.Entities[BombEntityIndex].Class.Name == "CPlantedC4")
                     return (CPlantedC4)EventInfo.Parser.RawData.Entities[BombEntityIndex].Instance;
+                return null;
             }
         }
 

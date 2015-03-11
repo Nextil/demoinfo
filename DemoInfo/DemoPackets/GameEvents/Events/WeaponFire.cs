@@ -30,8 +30,6 @@ namespace EHVAG.DemoInfo.DemoPackets.GameEvents.Events
 
         internal override void HandleYourself()
         {
-            Player = EventInfo.Parser.GameState.GetPlayerByUserID(UserID);
-
             EventInfo.Parser.Events.RaiseWeaponFire(this);
             //TODO: Weapon logic! CZ will be P250, etc. 
 
