@@ -17,6 +17,10 @@ namespace EHVAG.DemoInfo.States
         public event EventHandler<GameEventEventArgs<BombBeep>> BombBeep;
         public event EventHandler<GameEventEventArgs<WeaponZoom>> WeaponZoom;
         public event EventHandler<GameEventEventArgs<PlayerSpwan>> PlayerSpwan;
+        public event EventHandler<GameEventEventArgs<HLTVChase>> HLTVChase;
+        public event EventHandler<GameEventEventArgs<HLTVStatus>> HLTVStatus;
+        public event EventHandler<GameEventEventArgs<BombPickup>> BombPickup;
+        public event EventHandler<GameEventEventArgs<BombDropped>> BombDropped;
 
         public EventState(DemoParser parser)
         {
@@ -75,6 +79,32 @@ namespace EHVAG.DemoInfo.States
         {
             if(PlayerSpwan != null)
                 PlayerSpwan(Parser, new GameEventEventArgs<PlayerSpwan>(evnt));
+        }
+
+        internal void RaiseHLTVChase(HLTVChase evnt) 
+        {
+            if(HLTVChase != null)
+                HLTVChase(Parser, new GameEventEventArgs<HLTVChase>(evnt));
+        }
+
+        internal void RaiseHLTVStatus(HLTVStatus evnt) 
+        {
+            if(HLTVStatus != null)
+                HLTVStatus(Parser, new GameEventEventArgs<HLTVStatus>(evnt));
+        }
+
+
+
+        internal void RaiseBombPickup(BombPickup evnt) 
+        {
+            if(BombPickup != null)
+                BombPickup(Parser, new GameEventEventArgs<BombPickup>(evnt));
+        }
+
+        internal void RaiseBombDropped(BombDropped evnt) 
+        {
+            if(BombDropped != null)
+                BombDropped(Parser, new GameEventEventArgs<BombDropped>(evnt));
         }
 
     }

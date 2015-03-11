@@ -7,10 +7,6 @@ namespace EHVAG.DemoInfo.DemoPackets.GameEvents.Events
     [ValveEvent("bomb_beep")]
     public class BombBeep : BaseEvent
     {
-        /// <summary>
-        /// Gets the index of the bomb-entity. 
-        /// </summary>
-        /// <value>The index of the bomb entity.</value>
         [NetworkedProperty("entindex")]
         NetworkedVar<int> BombEntityIndex { get; set; }
 

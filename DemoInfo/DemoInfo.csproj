@@ -95,6 +95,10 @@
     <Compile Include="Edicts\CPlantedC4.cs" />
     <Compile Include="DemoPackets\GameEvents\Events\WeaponZoom.cs" />
     <Compile Include="DemoPackets\GameEvents\Events\PlayerSpwan.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\HLTVChase.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\BombPickup.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\BombDropped.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\HLTVStatus.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />
