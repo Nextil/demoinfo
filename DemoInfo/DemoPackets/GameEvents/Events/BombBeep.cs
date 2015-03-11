@@ -23,9 +23,7 @@ namespace EHVAG.DemoInfo.DemoPackets.GameEvents.Events
         { 
             get 
             {
-                if(EventInfo.Parser.RawData.Entities[BombEntityIndex].Class.Name == "CC4")
-                    return (CC4)EventInfo.Parser.RawData.Entities[BombEntityIndex].Instance;
-                return null;
+                return EventInfo.Parser.RawData.Entities[BombEntityIndex].Instance as CC4;
             }
         }
 
@@ -38,9 +36,7 @@ namespace EHVAG.DemoInfo.DemoPackets.GameEvents.Events
         { 
             get 
             {
-                if(EventInfo.Parser.RawData.Entities[BombEntityIndex].Class.Name == "CPlantedC4")
-                    return (CPlantedC4)EventInfo.Parser.RawData.Entities[BombEntityIndex].Instance;
-                return null;
+                return EventInfo.Parser.RawData.Entities[BombEntityIndex].Instance as CPlantedC4;
             }
         }
 
