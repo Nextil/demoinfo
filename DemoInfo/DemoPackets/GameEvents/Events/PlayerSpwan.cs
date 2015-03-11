@@ -18,18 +18,28 @@ namespace EHVAG.DemoInfo.DemoPackets.GameEvents.Events
         /// The Player who spwaned. 
         /// </summary>
         /// <value>The player.</value>
-        public CSPlayer Player { get; private set; }
+        public CSPlayer Player 
+        { 
+            get 
+            {
+                return EventInfo.Parser.GameState.GetPlayerByUserID(UserID);
+            } 
+        }
 
         /// <summary>
         /// The team of the spwaning player
         /// </summary>
         /// <value>The team.</value>
-        public CSTeam Team { get; private set; }
+        public CSTeam Team 
+        { 
+            get 
+            {
+                return EventInfo.Parser.GameState.Teams[TeamNum];
+            } 
+        }
 
         internal override void HandleYourself()
         {
-            Player = EventInfo.Parser.GameState.GetPlayerByUserID(UserID);
-
             EventInfo.Parser.Events.RaisePlayerSpwan(this);
         }
     }

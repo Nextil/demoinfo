@@ -11,15 +11,19 @@ namespace EHVAG.DemoInfo.DemoPackets.GameEvents.Events
         NetworkedVar<int> UserID { get; set; }
 
         /// <summary>
-        /// The Player who stepped. 
+        /// The Player who reloads. 
         /// </summary>
         /// <value>The player.</value>
-        public CSPlayer Player { get; private set; }
+        public CSPlayer Player 
+        { 
+            get 
+            {
+                return EventInfo.Parser.GameState.GetPlayerByUserID(UserID);
+            } 
+        }
 
         internal override void HandleYourself()
         {
-            Player = EventInfo.Parser.GameState.GetPlayerByUserID(UserID);
-
             EventInfo.Parser.Events.RaiseWeaponReload(this);
         }
     }

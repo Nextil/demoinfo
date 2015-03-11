@@ -14,12 +14,16 @@ namespace EHVAG.DemoInfo.DemoPackets.GameEvents.Events
         /// The Player who stepped. 
         /// </summary>
         /// <value>The player.</value>
-        public CSPlayer Player { get; private set; }
+        public CSPlayer Player 
+        { 
+            get 
+            {
+                return EventInfo.Parser.GameState.GetPlayerByUserID(UserID);
+            } 
+        }
 
         internal override void HandleYourself()
         {
-            Player = EventInfo.Parser.GameState.GetPlayerByUserID(UserID);
-
             EventInfo.Parser.Events.RaisePlayerFootstep(this);
         }
     }

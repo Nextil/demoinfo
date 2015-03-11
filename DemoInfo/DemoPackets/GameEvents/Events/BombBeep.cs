@@ -19,22 +19,31 @@ namespace EHVAG.DemoInfo.DemoPackets.GameEvents.Events
         /// PlantedBomb is null in this case. 
         /// </summary>
         /// <value>The bomb.</value>
-        public CC4 Bomb { get; private set; }
+        public CC4 Bomb 
+        { 
+            get 
+            {
+                if(EventInfo.Parser.RawData.Entities[BombEntityIndex].Class.Name == "CC4")
+                    return (CC4)EventInfo.Parser.RawData.Entities[BombEntityIndex].Instance;
+            }
+        }
 
         /// <summary>
         /// The entity of an already planted bomb. 
         /// Bomb is null in this case. 
         /// </summary>
         /// <value>The planted bomb.</value>
-        public CPlantedC4 PlantedBomb { get; private set; }
+        public CPlantedC4 PlantedBomb 
+        { 
+            get 
+            {
+                if(EventInfo.Parser.RawData.Entities[BombEntityIndex].Class.Name == "CPlantedC4")
+                    return (CPlantedC4)EventInfo.Parser.RawData.Entities[BombEntityIndex].Instance;
+            }
+        }
 
         internal override void HandleYourself()
         {
-            if(EventInfo.Parser.RawData.Entities[BombEntityIndex].Class.Name == "CC4")
-                Bomb = (CC4)EventInfo.Parser.RawData.Entities[BombEntityIndex].Instance;
-            else if(EventInfo.Parser.RawData.Entities[BombEntityIndex].Class.Name == "CPlantedC4")
-                PlantedBomb = (CPlantedC4)EventInfo.Parser.RawData.Entities[BombEntityIndex].Instance;
-
             EventInfo.Parser.Events.RaiseBombBeep(this);
         }
     }
