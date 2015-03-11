@@ -16,7 +16,6 @@ namespace EHVAG.DemoInfo.States
         public CSTeam CounterTerrorists { get; internal set; }
         public CSTeam Terrorists { get; internal set; }
 
-
         public CSTeam[] Teams { get; private set; }
 
         public List<CSPlayer> Players { get; set; }
@@ -28,10 +27,14 @@ namespace EHVAG.DemoInfo.States
             Players = new List<CSPlayer>();
         }
 
-        internal CSPlayer GetPlayerByUserID(int id)
+        public CSPlayer GetPlayerByUserID(int id)
         {
             return Players.SingleOrDefault(a => a.UserID == id);
         }
 
+        public CSPlayer GetPlayerByEntityIndex(int index)
+        {
+            return (CSPlayer)Parser.RawData.Entities[index].Instance;
+        }
     }
 }

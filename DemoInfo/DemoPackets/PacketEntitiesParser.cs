@@ -83,6 +83,9 @@ namespace EHVAG.DemoInfo.DemoPackets
                     // I'll just delete on the delete-flag however. 
                     if (reader.ReadBit())
                     {
+                        if (Parser.RawData.Entities[currentEntity].Instance != null)
+                            Parser.RawData.Entities[currentEntity].Instance.Deleted();
+
                         Parser.RawData.Entities[currentEntity] = null;
                     }
                 }

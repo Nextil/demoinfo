@@ -2,7 +2,7 @@
 
 namespace EHVAG.DemoInfo.Edicts
 {
-    public class BaseEntity
+    public abstract class BaseEntity
     {
         /// <summary>
         /// Gets the entity-id. This ID is raw-data and should not be used for most things
@@ -12,14 +12,17 @@ namespace EHVAG.DemoInfo.Edicts
 
         internal EntityInformation EntityInfo { get; set; }
 
-        protected BaseEntity()
+        /// <summary>
+        /// This is called after the first update (and the instance baseline) is parsed
+        /// </summary>
+        internal virtual void FullyInitialized() 
         {
         }
 
         /// <summary>
-        /// This is called after the first update (and the instance baseline) is called
+        /// This is called when the entity is deleted. 
         /// </summary>
-        internal virtual void FullyInitialized()
+        internal virtual void Deleted() 
         {
         }
     }

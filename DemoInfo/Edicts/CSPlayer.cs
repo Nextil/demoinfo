@@ -219,6 +219,10 @@ namespace EHVAG.DemoInfo.Edicts
         {
             EntityInfo.Parser.GameState.Players.Add(this);
         }
+    
+        internal override void Deleted()
+        {
+        }
     }
 }
 
