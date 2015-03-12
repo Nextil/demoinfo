@@ -54,8 +54,9 @@ namespace EHVAG.DemoInfo.DemoPackets.GameEvents
         /// <value>The vectors.</value>
         internal NetworkedVar<bool>[] Bools { get; private set; }
 
-
         private readonly GameEventList.Descriptor EventDescriptor;
+
+        private GameEvent LastEvent;
 
         public EventInformation(GameEventList.Descriptor eventDescriptor, DemoParser parser)
         {
@@ -138,6 +139,7 @@ namespace EHVAG.DemoInfo.DemoPackets.GameEvents
         /// <param name="gameEvent">Game event.</param>
         public void Fill(GameEvent gameEvent)
         {
+            LastEvent = gameEvent;
             int i = 0;
             foreach (var key in EventDescriptor.Keys)
             {
@@ -165,6 +167,15 @@ namespace EHVAG.DemoInfo.DemoPackets.GameEvents
 
                 i++;
             }
+        }
+    
+        public EventInformation Copy() 
+        {
+            EventInformation info = new EventInformation(EventDescriptor, Parser);
+            info.Fill(LastEvent);
+            info.Instance.InitializeCopy(Instance);
+        
+            return info;
         }
     }
 }
