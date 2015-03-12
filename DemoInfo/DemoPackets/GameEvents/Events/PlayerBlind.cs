@@ -24,6 +24,7 @@ namespace EHVAG.DemoInfo.DemoPackets.GameEvents.Events
 
         internal override void HandleYourself()
         {
+            EventInfo.Parser.RawData.BlindPlayersFromLastFlashbang.Add(Player);
             EventInfo.Parser.Events.RaisePlayerBlind(this);
         }
     }

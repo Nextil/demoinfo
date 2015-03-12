@@ -99,6 +99,10 @@
     <Compile Include="DemoPackets\GameEvents\Events\BombPickup.cs" />
     <Compile Include="DemoPackets\GameEvents\Events\BombDropped.cs" />
     <Compile Include="DemoPackets\GameEvents\Events\HLTVStatus.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\PlayerDeath.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\SmokegrenadeDetonate.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\SmokegrenadeExpired.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\FlashbangDetonate.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />

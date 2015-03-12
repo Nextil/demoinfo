@@ -66,6 +66,8 @@ namespace EHVAG.DemoInfo.States
 
         public Dictionary<int, GameEventList.Descriptor> GameEventDescriptors { get; private set; }
 
+        internal List<CSPlayer> BlindPlayersFromLastFlashbang { get; private set; }
+
         public GameEventParser GameEventParser { get; set; }
 
         /// <summary>
@@ -74,13 +76,16 @@ namespace EHVAG.DemoInfo.States
         public RawDataState(DemoParser parser)
         {
             this.Parser = parser;
+
             StringTables = new Dictionary<string, StringTable>();
             ServerClasses = new List<ServerClass>(128); //this is an estimate
             PlayerInfos = new PlayerInfo[MAX_PLAYERS];
             Entities = new EntityInformation[MAX_EDICTS];
-            PacketParser = new DemoPacketsParser(Parser);
+            BlindPlayersFromLastFlashbang = new List<CSPlayer>();
             GameEventDescriptors = new Dictionary<int, GameEventList.Descriptor>();
             CreateStringTableMessages = new List<CreateStringTable>();
+
+            PacketParser = new DemoPacketsParser(Parser);
             GameEventParser = new GameEventParser(Parser);
         }
 
