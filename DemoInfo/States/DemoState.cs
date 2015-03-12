@@ -29,7 +29,14 @@ namespace EHVAG.DemoInfo.States
 
         public CSPlayer GetPlayerByUserID(int id)
         {
+            // The idea here is to use the faster variant "FirstOrDefault" when 
+            // in production - but it should always contain only one matching user
+            // so let's check that here!
+            #if DEBUG_SLOW_MONO
             return Players.SingleOrDefault(a => a.UserID == id);
+            #else
+            return Players.FirstOrDefault(a => a.UserID == id);
+            #endif
         }
 
         public CSPlayer GetPlayerByEntityIndex(int index)
