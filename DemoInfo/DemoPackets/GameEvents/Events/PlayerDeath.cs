@@ -80,7 +80,8 @@ namespace EHVAG.DemoInfo.DemoPackets.GameEvents.Events
         }
 
         /// <summary>
-        /// Gets the attacker.
+        /// Gets the attacker. Keep in mind that this can be null, e.g. when
+        /// the world killed. 
         /// </summary>
         /// <value>The attacker.</value>
         public CSPlayer Attacker {

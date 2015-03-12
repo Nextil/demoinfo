@@ -103,6 +103,20 @@
     <Compile Include="DemoPackets\GameEvents\Events\SmokegrenadeDetonate.cs" />
     <Compile Include="DemoPackets\GameEvents\Events\SmokegrenadeExpired.cs" />
     <Compile Include="DemoPackets\GameEvents\Events\FlashbangDetonate.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\CSWinPanelRound.cs" />
+    <Compile Include="ValveStructs\RoundEndReason.cs" />
+    <Compile Include="ValveStructs\RoundMVPReason.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\RoundEnd.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\CSPreRestart.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\RoundOfficiallyEnded.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\RoundPrestart.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\RoundStart.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\RoundPoststart.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\RoundFinalBeep.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\RoundStartBeep.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\RoundFreezeEnd.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\BeginNewMatch.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\RoundAnnounceMatchStart.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />
