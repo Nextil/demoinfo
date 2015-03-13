@@ -100,14 +100,9 @@ namespace EHVAG.DemoInfo.DemoPackets.GameEvents.Events
             }
         }
 
-
-        public PlayerDeath()
-        {
-        }
-
         internal override void HandleYourself()
         {
-
+            EventInfo.Parser.Events.RaisePlayerDeath(this);
         }
     }
 }

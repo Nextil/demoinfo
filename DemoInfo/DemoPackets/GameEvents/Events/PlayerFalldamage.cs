@@ -25,6 +25,8 @@ namespace EHVAG.DemoInfo.DemoPackets.GameEvents.Events
 
         /// <summary>
         /// Gets the falldamage inflicted to the player. 
+        /// As far as I know the applied damage is Math.floor(Falldamage). 
+        /// So if you have 5 hp, and this is 4.99, you'll survive with 1hp.
         /// </summary>
         /// <value>The falldamage.</value>
         [NetworkedProperty("damage")]
@@ -32,6 +34,7 @@ namespace EHVAG.DemoInfo.DemoPackets.GameEvents.Events
 
         internal override void HandleYourself()
         {
+            EventInfo.Parser.Events.RaisePlayerFalldamage(this);
         }
 
     }

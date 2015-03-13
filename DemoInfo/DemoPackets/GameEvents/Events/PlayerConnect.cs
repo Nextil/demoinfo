@@ -62,6 +62,8 @@ namespace EHVAG.DemoInfo.DemoPackets.GameEvents.Events
             playerInfo.GUID = NetworkID;
             playerInfo.UserID = UserID;
             playerInfo.XUID = playerInfo.GUID == "BOT" ? 0 : Util.GetCommunityID(playerInfo.GUID);
+
+            EventInfo.Parser.Events.RaisePlayerConnect(this);
         }
 
 

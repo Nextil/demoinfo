@@ -60,6 +60,8 @@ namespace EHVAG.DemoInfo.DemoPackets.GameEvents.Events
             // his reference changes. 
             BlindPlayers = new List<CSPlayer>(EventInfo.Parser.RawData.BlindPlayersFromLastFlashbang);
             EventInfo.Parser.RawData.BlindPlayersFromLastFlashbang.Clear();
+
+            EventInfo.Parser.Events.RaiseFlashbangDetonate(this);
         }
 
         internal override void InitializeCopy(BaseEvent oldEvent)

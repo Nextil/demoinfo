@@ -48,6 +48,8 @@ namespace EHVAG.DemoInfo.DemoPackets.GameEvents.Events
         {
             foreach(var playerinfo in EventInfo.Parser.RawData.PlayerInfos.Where(a => a != null && a.UserID == UserID))
                 playerinfo.Name = string.Format("unconnected (formerly {0})", Name);
+
+            EventInfo.Parser.Events.RaisePlayerDisconnect(this);
         }
 
 

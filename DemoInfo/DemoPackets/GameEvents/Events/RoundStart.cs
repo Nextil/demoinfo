@@ -29,7 +29,7 @@ namespace EHVAG.DemoInfo.DemoPackets.GameEvents.Events
 
         internal override void HandleYourself()
         {
-
+            EventInfo.Parser.Events.RaiseRoundStart(this);
         }
     }
 }

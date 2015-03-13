@@ -42,13 +42,10 @@ namespace EHVAG.DemoInfo.DemoPackets.GameEvents.Events
         /// <value>The position.</value>
         public Vector Position { get { return new Vector(X, Y, Z); }}
 
-        public SmokegrenadeDetonate()
-        {
-        }
 
         internal override void HandleYourself()
         {
-
+            EventInfo.Parser.Events.RaiseSmokegrenadeDetonate(this);
         }
     }
 }

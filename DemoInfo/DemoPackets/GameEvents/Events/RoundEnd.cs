@@ -25,13 +25,10 @@ namespace EHVAG.DemoInfo.DemoPackets.GameEvents.Events
        
         public RoundEndReason Reason { get { return (RoundEndReason)ReasonID.Value; } }
 
-        public RoundEnd()
-        {
-        }
 
         internal override void HandleYourself()
         {
-
+            EventInfo.Parser.Events.RaiseRoundEnd(this);
         }
     }
 }
