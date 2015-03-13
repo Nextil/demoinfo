@@ -117,6 +117,31 @@
     <Compile Include="DemoPackets\GameEvents\Events\RoundFreezeEnd.cs" />
     <Compile Include="DemoPackets\GameEvents\Events\BeginNewMatch.cs" />
     <Compile Include="DemoPackets\GameEvents\Events\RoundAnnounceMatchStart.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\BuytimeEnded.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\DecoyStarted.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\HEGrenadeDetonate.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\DecoyDetonate.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\BombBeginplant.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\BombPlanted.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\InfernoStartburn.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\InfernoExpire.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\InfernoExtinguish.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\RoundTimeWarning.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\BombExploded.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\PlayerFalldamage.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\RoundMVP.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\BombBegindefuse.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\BombDefused.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\RoundAnnounceLastRoundHalf.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\AnnouncePhaseEnd.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\PlayerTeam.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\RoundAnnounceMatchPoint.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\RoundAnnounceFinal.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\CSWinPanelMatch.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\PlayerConnect.cs" />
+    <Compile Include="Utils\SteamIDUtil.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\PlayerDisconnect.cs" />
+    <Compile Include="DemoPackets\GameEvents\Events\PlayerConnectFull.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />
