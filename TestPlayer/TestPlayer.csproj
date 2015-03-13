@@ -29,6 +29,7 @@
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
     <ConsolePause>false</ConsolePause>
+    <Commandlineparameters>/home/moritz/Desktop/ldlcpass.dem</Commandlineparameters>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
