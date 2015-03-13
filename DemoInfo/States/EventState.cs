@@ -8,59 +8,283 @@ namespace EHVAG.DemoInfo.States
     {
         readonly DemoParser Parser;
 
-
+        /// <summary>
+        /// Occurs when a phase ends. I think this occures when warmup ends. 
+        /// </summary>
         public event EventHandler<GameEventEventArgs<AnnouncePhaseEnd>> AnnouncePhaseEnd;
+
+        /// <summary>
+        /// Occurs when the bomb is dropped.
+        /// </summary>
         public event EventHandler<GameEventEventArgs<BombDropped>> BombDropped;
+
+        /// <summary>
+        /// Occurs when a bot is taken over.
+        /// </summary>
+        public event EventHandler<GameEventEventArgs<BotTakeover>> BotTakeover;
+
+        /// <summary>
+        /// Occurs when the game is over, and the endmatch-panel is shown. 
+        /// </summary>
         public event EventHandler<GameEventEventArgs<CSWinPanelMatch>> CSWinPanelMatch;
+
+        /// <summary>
+        /// Event to control the camera. Look at the HLTVChase class documentation for more info
+        /// </summary>
         public event EventHandler<GameEventEventArgs<HLTVChase>> HLTVChase;
+
+        /// <summary>
+        /// Occurs when player connects.
+        /// </summary>
         public event EventHandler<GameEventEventArgs<PlayerConnect>> PlayerConnect;
+
+        /// <summary>
+        /// Occurs when player jumps.
+        /// </summary>
         public event EventHandler<GameEventEventArgs<PlayerJump>> PlayerJump;
+
+        /// <summary>
+        /// Announces the match-start-round, right at the end of the freezetime. 
+        /// </summary>
         public event EventHandler<GameEventEventArgs<RoundAnnounceMatchStart>> RoundAnnounceMatchStart;
+
+        /// <summary>
+        /// Occurs when the round started.
+        /// </summary>
         public event EventHandler<GameEventEventArgs<RoundPoststart>> RoundPoststart;
+
+        /// <summary>
+        /// Occurs when smokegrenade expired. This is not raised at the end of a round, 
+        /// so if you keep track of active smokes make sure to remove the smokes at 
+        /// the end of the round. 
+        /// </summary>
         public event EventHandler<GameEventEventArgs<SmokegrenadeExpired>> SmokegrenadeExpired;
+
+        /// <summary>
+        /// Annouces the beginning of a new match. This is raised at the end of the freezetime. 
+        /// </summary>
         public event EventHandler<GameEventEventArgs<BeginNewMatch>> BeginNewMatch;
+
+        /// <summary>
+        /// Occurs when bomb exploded.
+        /// </summary>
         public event EventHandler<GameEventEventArgs<BombExploded>> BombExploded;
+
+        /// <summary>
+        /// Occurs when the Round-Win-Panel in CS:GO is shown. 
+        /// </summary>
         public event EventHandler<GameEventEventArgs<CSWinPanelRound>> CSWinPanelRound;
+
+        /// <summary>
+        /// Contains information about how many people view the game (and are eligible for drops)
+        /// </summary>
         public event EventHandler<GameEventEventArgs<HLTVStatus>> HLTVStatus;
+
+        /// <summary>
+        /// Occurs when a player has fully connected
+        /// </summary>
         public event EventHandler<GameEventEventArgs<PlayerConnectFull>> PlayerConnectFull;
+
+        /// <summary>
+        /// Occurs when player spwans.
+        /// </summary>
         public event EventHandler<GameEventEventArgs<PlayerSpwan>> PlayerSpwan;
+
+        /// <summary>
+        /// Occurs when a round ends. Contains information about round-winners. 
+        /// </summary>
         public event EventHandler<GameEventEventArgs<RoundEnd>> RoundEnd;
+
+        /// <summary>
+        /// Occurs when round prestart.
+        /// </summary>
         public event EventHandler<GameEventEventArgs<RoundPrestart>> RoundPrestart;
+
+        /// <summary>
+        /// Only relevant for majors. 
+        /// </summary>
         public event EventHandler<GameEventEventArgs<TournamentReward>> TournamentReward;
+
+        /// <summary>
+        /// Occurs when the bomb beeps.
+        /// </summary>
         public event EventHandler<GameEventEventArgs<BombBeep>> BombBeep;
+
+        /// <summary>
+        /// Occurs when bomb pickup.
+        /// </summary>
         public event EventHandler<GameEventEventArgs<BombPickup>> BombPickup;
+
+        /// <summary>
+        /// Occurs when decoy detonate. This is not raised at the end of a round, 
+        /// so if you keep track of active decoys make sure to remove the smokes at 
+        /// the end of the round. 
+        /// </summary>
         public event EventHandler<GameEventEventArgs<DecoyDetonate>> DecoyDetonate;
+
+        /// <summary>
+        /// Occurs when inferno expire. This is not raised at the end of a round, 
+        /// so if you keep track of active molotovs make sure to remove the smokes at 
+        /// the end of the round. 
+        /// </summary>
         public event EventHandler<GameEventEventArgs<InfernoExpire>> InfernoExpire;
+
+        /// <summary>
+        /// Occurs when a player dies. By the way: There is no player_hurt event, 
+        /// (at least it isn't stored in demos)
+        /// </summary>
         public event EventHandler<GameEventEventArgs<PlayerDeath>> PlayerDeath;
+
+        /// <summary>
+        /// Occurs when a player joins a team.
+        /// </summary>
         public event EventHandler<GameEventEventArgs<PlayerTeam>> PlayerTeam;
+
+        /// <summary>
+        /// Occurs when round final beep.
+        /// </summary>
         public event EventHandler<GameEventEventArgs<RoundFinalBeep>> RoundFinalBeep;
+
+        /// <summary>
+        /// Occurs when round start beep.
+        /// </summary>
         public event EventHandler<GameEventEventArgs<RoundStartBeep>> RoundStartBeep;
+
+        /// <summary>
+        /// Occurs when a weapon is fired.
+        /// </summary>
         public event EventHandler<GameEventEventArgs<WeaponFire>> WeaponFire;
+
+        /// <summary>
+        /// Occurs when bomb begindefuse.
+        /// </summary>
         public event EventHandler<GameEventEventArgs<BombBegindefuse>> BombBegindefuse;
+
+        /// <summary>
+        /// Occurs when bomb planted.
+        /// </summary>
         public event EventHandler<GameEventEventArgs<BombPlanted>> BombPlanted;
+
+        /// <summary>
+        /// Occurs when decoy started.
+        /// </summary>
         public event EventHandler<GameEventEventArgs<DecoyStarted>> DecoyStarted;
+
+        /// <summary>
+        /// Might occur when a inferno is extinguished. I've never seen this occur though, 
+        /// so this might not be networked. 
+        /// </summary>
         public event EventHandler<GameEventEventArgs<InfernoExtinguish>> InfernoExtinguish;
+
+        /// <summary>
+        /// Occurs when a player disconnects.
+        /// </summary>
         public event EventHandler<GameEventEventArgs<PlayerDisconnect>> PlayerDisconnect;
+
+        /// <summary>
+        /// Annouces the final round. 
+        /// </summary>
         public event EventHandler<GameEventEventArgs<RoundAnnounceFinal>> RoundAnnounceFinal;
+
+        /// <summary>
+        /// Occurs when the freezetime ends. 
+        /// </summary>
         public event EventHandler<GameEventEventArgs<RoundFreezeEnd>> RoundFreezeEnd;
+
+        /// <summary>
+        /// Occurs when round starts. This is before the freezetime. The positions, HP etc. propbably hasn't 
+        /// chaned yet. So when this event occurs, don't be surprised when there are less than 10 people alive. 
+        /// </summary>
         public event EventHandler<GameEventEventArgs<RoundStart>> RoundStart;
+
+        /// <summary>
+        /// Occurs when a weapon is being reloaded. 
+        /// </summary>
         public event EventHandler<GameEventEventArgs<WeaponReload>> WeaponReload;
+
+        /// <summary>
+        /// Occurs when the bomb is begun to planted. 
+        /// </summary>
         public event EventHandler<GameEventEventArgs<BombBeginplant>> BombBeginplant;
+
+        /// <summary>
+        /// Occurs when buytime ended.
+        /// </summary>
         public event EventHandler<GameEventEventArgs<BuytimeEnded>> BuytimeEnded;
+
+        /// <summary>
+        /// Occurs when flashbang detonate. It contains a list with blind players. 
+        /// </summary>
         public event EventHandler<GameEventEventArgs<FlashbangDetonate>> FlashbangDetonate;
+
+        /// <summary>
+        /// Occurs when inferno startburn.
+        /// </summary>
         public event EventHandler<GameEventEventArgs<InfernoStartburn>> InfernoStartburn;
+
+        /// <summary>
+        /// Occurs when a player takes falldamage.
+        /// </summary>
         public event EventHandler<GameEventEventArgs<PlayerFalldamage>> PlayerFalldamage;
+
+        /// <summary>
+        /// Announces the last round of the half
+        /// </summary>
         public event EventHandler<GameEventEventArgs<RoundAnnounceLastRoundHalf>> RoundAnnounceLastRoundHalf;
+
+        /// <summary>
+        /// Announces the MVP of the round. 
+        /// </summary>
         public event EventHandler<GameEventEventArgs<RoundMVP>> RoundMVP;
+
+        /// <summary>
+        /// Occurs when the remaining round time is little. 
+        /// </summary>
         public event EventHandler<GameEventEventArgs<RoundTimeWarning>> RoundTimeWarning;
+
+        /// <summary>
+        /// Occurs when a weapon is zoomed. 
+        /// </summary>
         public event EventHandler<GameEventEventArgs<WeaponZoom>> WeaponZoom;
+
+        /// <summary>
+        /// Occurs when the bomb is defused.
+        /// </summary>
         public event EventHandler<GameEventEventArgs<BombDefused>> BombDefused;
+
+        /// <summary>
+        /// Occurs right before a restart. 
+        /// </summary>
         public event EventHandler<GameEventEventArgs<CSPreRestart>> CSPreRestart;
+
+        /// <summary>
+        /// Occurs when HE grenade detonates.
+        /// </summary>
         public event EventHandler<GameEventEventArgs<HEGrenadeDetonate>> HEGrenadeDetonate;
+
+        /// <summary>
+        /// Occurs when player is blind. The flashbang-detonate right after contains this player. 
+        /// </summary>
         public event EventHandler<GameEventEventArgs<PlayerBlind>> PlayerBlind;
+
+        /// <summary>
+        /// Occurs when player steps.
+        /// </summary>
         public event EventHandler<GameEventEventArgs<PlayerFootstep>> PlayerFootstep;
+
+        /// <summary>
+        /// Announces the match point. 
+        /// </summary>
         public event EventHandler<GameEventEventArgs<RoundAnnounceMatchPoint>> RoundAnnounceMatchPoint;
+
+        /// <summary>
+        /// Occurs when the round officially ended.This is right before the players respwan. 
+        /// </summary>
         public event EventHandler<GameEventEventArgs<RoundOfficiallyEnded>> RoundOfficiallyEnded;
+
+        /// <summary>
+        /// Occurs when a smokegrenade detonates.
+        /// </summary>
         public event EventHandler<GameEventEventArgs<SmokegrenadeDetonate>> SmokegrenadeDetonate;
 
         public EventState(DemoParser parser)
@@ -78,6 +302,12 @@ namespace EHVAG.DemoInfo.States
         {
             if(BombDropped != null)
                 BombDropped(Parser, new GameEventEventArgs<BombDropped>(evnt));
+        }
+
+        internal void RaiseBotTakeover(BotTakeover evnt)
+        {
+            if(BotTakeover != null)
+                BotTakeover(Parser, new GameEventEventArgs<BotTakeover>(evnt));
         }
 
         internal void RaiseCSWinPanelMatch(CSWinPanelMatch evnt)
