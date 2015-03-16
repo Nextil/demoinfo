@@ -143,6 +143,7 @@
     <Compile Include="DemoPackets\GameEvents\Events\PlayerDisconnect.cs" />
     <Compile Include="DemoPackets\GameEvents\Events\PlayerConnectFull.cs" />
     <Compile Include="DemoPackets\GameEvents\Events\BotTakeover.cs" />
+    <Compile Include="Edicts\CSWeapon.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />
