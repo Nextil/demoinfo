@@ -118,6 +118,49 @@ namespace EHVAG.DemoInfo.Utils.Reflection
 
                 }
             }
+        
+            AddSubClasses();
+        }
+
+        private void AddSubClasses() {
+            foreach(var serverClass in parser.RawData.ServerClasses) {
+                // We only care about classes that haven't a entity-type yet. 
+                if (serverClass.EntityType != null)
+                    continue;
+
+                // So we check if any super-class is implemented
+                // Reverse, since BaseClasses[0] is the lowest class in the hirachy. 
+                foreach (var superClass in serverClass.BaseClasses.Reverse<ServerClass>())
+                {
+                    if (superClass.EntityType != null)
+                    {
+                        // So this superclass is implemented
+                        serverClass.EntityType = superClass.EntityType;
+
+                        // No we match the properties. 
+                        foreach (var superClassProp in superClass.FlattenedProps)
+                        {
+                            // We can't match them by index because of exclude props.
+
+                            // If this hasn't a setter we can ignore it anyways. 
+                            if (superClassProp.Setter == null)
+                                continue;
+
+                            // Find the matching prop in the current class. 
+                            var serverClassProp = serverClass.FlattenedProps.SingleOrDefault(a => a.PropertyName == superClassProp.PropertyName);
+
+                            if (serverClassProp == null)
+                                continue;
+
+                            // and set it. 
+                            serverClassProp.Setter = superClassProp.Setter;
+
+                        }
+
+                        continue;
+                    }
+                }
+            }
         }
 
         public void DoGameEventReflection()
