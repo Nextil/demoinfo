@@ -2,7 +2,6 @@
 using System.Diagnostics;
 using System.IO;
 using EHVAG.DemoInfo;
-using EHVAG.DemoInfo.Edicts;
 
 namespace TestPlayer
 {
@@ -13,8 +12,6 @@ namespace TestPlayer
             Stopwatch watch = new Stopwatch();
             watch.Start();
             var stream = File.OpenRead(args[0]);
-
-            
 
             DemoParser parser = new DemoParser(stream);
 
