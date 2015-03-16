@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace EHVAG.DemoInfo.DataTables
 {
+    [DebuggerDisplay("ServerClass: {Name}")]
     public class ServerClass
     {
         public int ClassID { get; set; }
@@ -24,6 +26,8 @@ namespace EHVAG.DemoInfo.DataTables
             FlattenedProps = new List<FlattenedPropEntry>();
             BaseClasses = new List<ServerClass>();
         }
+
+
     }
 }
 
